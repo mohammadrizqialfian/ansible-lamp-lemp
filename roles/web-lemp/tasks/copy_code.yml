@@ -1,0 +1,10 @@
+#copy index.html from host to server
+- name: copy html for nginx
+  copy: src=../templates/index.html dest=/usr/share/nginx/html/index.html
+  notify:
+  - restart-nginx
+#copy info.php from host to server
+- name: copy phpinfo for nginx
+  copy: src=../templates/info.php dest=/usr/share/nginx/html/info.php
+  notify:
+  - restart-nginx

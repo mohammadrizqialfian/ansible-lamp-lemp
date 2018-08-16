@@ -1,0 +1,11 @@
+- name: install Lamp
+  yum: pkg={{ item }} state=present
+  notify: 
+    - start-apache       
+    - start-mariadb
+  with_items:
+    - httpd
+    - mariadb-server
+    - php
+    - php-fpm
+    - php-mysql

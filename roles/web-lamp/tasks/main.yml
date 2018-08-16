@@ -1,0 +1,5 @@
+---
+#read file install_lamp.yml
+- include: install_lamp.yml
+#read file copy_code.yml
+- include: copy_code.yml

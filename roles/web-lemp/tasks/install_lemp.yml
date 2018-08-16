@@ -1,0 +1,13 @@
+- name: install epel-release
+  yum: name=epel-release state=present
+- name: install Lamp
+  yum: pkg={{ item }} state=present
+  notify: 
+    - start-nginx       
+    - start-mariadb
+  with_items:
+    - nginx
+    - mariadb-server
+    - php
+    - php-fpm
+    - php-mysql

@@ -1,0 +1,5 @@
+- name: start-apache
+  systemd:
+    pk: 
+    state: started
+    enabled: yes

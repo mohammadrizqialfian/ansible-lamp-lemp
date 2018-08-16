@@ -1,0 +1,28 @@
+#start nginx on booting and activate apache
+- name: start-nginx
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes
+#start mariadb on booting and activate mariadb
+- name: start-mariadb
+  systemd:
+    name: mariadb
+    state: started
+    enabled: yes
+#start php-fpm and activate php-fpm
+- name: start-php-fpm
+  systemd:
+    name: php-fpm
+    state: started
+    enabled: yes
+#restart nginx
+- name: restart-nginx
+  systemd:
+    name: nginx
+    state: restarted
+#restart mariadb
+- name: restart-mariadb
+  systemd:
+    name: mariadb
+    state: restarted

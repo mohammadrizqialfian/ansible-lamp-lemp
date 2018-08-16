@@ -1,0 +1,23 @@
+#start apache on booting and activate apache
+- name: start-apache
+  systemd:
+    name: httpd
+    state: started
+    enabled: yes
+#start mariadb on booting and activate mariadb
+- name: start-mariadb
+  systemd:
+    name: mariadb
+    state: started
+    enabled: yes
+#restart apache
+- name: restart-apache
+  systemd:
+    name: httpd
+    state: restarted
+#restart mariadb
+- name: restart-mariadb
+  systemd:
+    name: mariadb
+    state: restarted
+

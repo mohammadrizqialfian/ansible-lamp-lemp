@@ -1,0 +1,7 @@
+---
+#read file install_lemp.yml
+- include: install_lemp.yml
+#read file copy_code.yml
+- include: copy_code.yml
+#read file config_php_nginx
+- include: config_php_nginx.yml

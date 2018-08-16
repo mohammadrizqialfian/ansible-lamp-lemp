@@ -1,0 +1,32 @@
+- name: config php.ini
+  command: sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php.ini
+- name: config www.conf 1
+  command: sed -i 's/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm\/php-fpm.sock/g' /etc/php-fpm.d/www.conf 
+- name: config www.conf 2
+  command: sed -i 's/;listen.owner = nobody/listen.owner = nobody/g' /etc/php-fpm.d/www.conf
+- name: config www.conf 3
+  command: sed -i 's/;listen.group = nobody/listen.group = nobody/g' /etc/php-fpm.d/www.conf
+- name: config www.conf 4
+  command: sed -i 's/user = apache/user = nginx/g' /etc/php-fpm.d/www.conf
+- name: config www.conf 5
+  command: sed -i 's/group = apache/group = nginx/g' /etc/php-fpm.d/www.conf
+  notify:
+  - start-php-fpm
+- name: config nginx.conf 1
+  command: sed -i '43i \\tindex index.php index.html index.html;' /etc/nginx/nginx.conf
+- name: config nginx.conf 2
+  command: sed -i '58i \\tlocation ~ \.php$ {' /etc/nginx/nginx.conf
+- name: config nginx.conf 3
+  command: sed -i '59i \\t\ttry_files $uri =404;' /etc/nginx/nginx.conf
+- name: config nginx.conf 4
+  command: sed -i '60i \\t\tfastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;' /etc/nginx/nginx.conf
+- name: config nginx.conf 5
+  command: sed -i '61i \\t\tfastcgi_index index.php;' /etc/nginx/nginx.conf
+- name: config nginx.conf 6
+  command: sed -i '62i \\t\tfastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;' /etc/nginx/nginx.conf
+- name: config nginx.conf 7
+  command: sed -i '63i \\t\tinclude fastcgi_params;' /etc/nginx/nginx.conf
+- name: config nginx.conf 8
+  command: sed -i '64i \\t}' /etc/nginx/nginx.conf
+  notify:
+  - restart-nginx
